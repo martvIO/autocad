@@ -1,0 +1,130 @@
+[
+  {
+    "depth": 0,
+    "control_type": "List",
+    "class_name": "TaskListThumbnailWnd",
+    "name": "‏‏מחליף משימות",
+    "framework": "Win32",
+    "enabled": true,
+    "visible": true,
+    "rect": [
+      0,
+      829,
+      1920,
+      1040
+    ],
+    "window_text": "‏‏מחליף משימות",
+    "items": [
+      {
+        "name": "12182-110526.dwg",
+        "selected": 0,
+        "type": "ListItem"
+      },
+      {
+        "name": "Drawing9.dwg",
+        "selected": 0,
+        "type": "ListItem"
+      },
+      {
+        "name": "Drawing10.dwg",
+        "selected": 0,
+        "type": "ListItem"
+      }
+    ],
+    "localized_control_type": "‏‏רשימה",
+    "keyboard_focusable": 1,
+    "is_content": 1,
+    "is_control": 1
+  },
+  {
+    "depth": 1,
+    "control_type": "Pane",
+    "class_name": "TaskListOverlayWnd",
+    "framework": "Win32",
+    "enabled": true,
+    "visible": true,
+    "rect": [
+      841,
+      892,
+      1491,
+      1040
+    ],
+    "localized_control_type": "‏‏חלונית",
+    "keyboard_focusable": 1,
+    "is_content": 1,
+    "is_control": 1
+  },
+  {
+    "depth": 1,
+    "control_type": "ListItem",
+    "name": "12182-110526.dwg",
+    "enabled": true,
+    "visible": true,
+    "rect": [
+      1275,
+      892,
+      1491,
+      1040
+    ],
+    "window_text": "12182-110526.dwg",
+    "localized_control_type": "‏‏פריט רשימה",
+    "keyboard_focusable": 1,
+    "is_content": 1,
+    "is_control": 1
+  },
+  {
+    "depth": 1,
+    "control_type": "ListItem",
+    "name": "Drawing9.dwg",
+    "enabled": true,
+    "visible": true,
+    "rect": [
+      1058,
+      892,
+      1274,
+      1040
+    ],
+    "window_text": "Drawing9.dwg",
+    "localized_control_type": "‏‏פריט רשימה",
+    "keyboard_focusable": 1,
+    "is_content": 1,
+    "is_control": 1
+  },
+  {
+    "depth": 1,
+    "control_type": "ListItem",
+    "name": "Drawing10.dwg",
+    "enabled": true,
+    "visible": true,
+    "rect": [
+      841,
+      892,
+      1057,
+      1040
+    ],
+    "window_text": "Drawing10.dwg",
+    "localized_control_type": "‏‏פריט רשימה",
+    "keyboard_focusable": 1,
+    "is_content": 1,
+    "is_control": 1
+  },
+  {
+    "depth": 1,
+    "control_type": "Button",
+    "name": "‏‏סגור",
+    "enabled": true,
+    "visible": true,
+    "rect": [
+      841,
+      892,
+      873,
+      924
+    ],
+    "window_text": "‏‏סגור",
+    "value": "‏‏סגור",
+    "localized_control_type": "‏‏לחצן",
+    "keyboard_focusable": 1,
+    "is_content": 1,
+    "is_control": 1
+  }
+]

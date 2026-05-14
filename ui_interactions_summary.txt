@@ -1,0 +1,27 @@
+Session ended: 2026-05-14T08:14:46
+Total events logged: 29
+
+By event:
+  click           29
+
+By control type:
+  Button               10
+  Edit                 8
+  CheckBox             4
+  Window               1
+  ComboBox             1
+  ListItem             1
+  RadioButton          1
+
+By element name (top 30):
+  '  OK  '                                      3
+  'Symb Code: '                                 2
+  'PythonProject – GetDialogATTB.py'            1
+  'Pick->'                                      1
+  'Cancel'                                      1
+  'Visible'                                     1
+  'On'                                          1
+  'All'                                         1
+  'Pit   Filter'                                1
+  'PitFilt->'                                   1
+  '\u200f\u200fPyCharm 2026.1.1 - חלון פועל אחד' 1

@@ -1,0 +1,6 @@
+[List] '\u200f\u200fמחליף משימות' class='TaskListThumbnailWnd' items(3)=[{'name': '12182-110526.dwg', 'selected': 0, 'type': 'ListItem'}, {'name': 'Drawing9.dwg', 'selected': 0, 'type': 'ListItem'}, {'name': 'Drawing10.dwg', 'selected': 0, 'type': 'ListItem'}]
+  [Pane] class='TaskListOverlayWnd'
+  [ListItem] '12182-110526.dwg'
+  [ListItem] 'Drawing9.dwg'
+  [ListItem] 'Drawing10.dwg'
+  [Button] '\u200f\u200fסגור' value='\u200f\u200fסגור'
