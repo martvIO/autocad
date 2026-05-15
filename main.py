@@ -13,8 +13,8 @@ def dump_all_attribs(e, f, indent="  "):
         f.write(f"{indent}{key} = {value}\n")
 
 def run():
-    input_path = r"C:\Users\user1\Desktop\26357.dxf"
-    output_path = r"C:\Users\user1\Desktop\26357_entities.txt"
+    input_path = r"26357.dxf"
+    output_path = r"26357_entities.txt"
 
     doc = ezdxf.readfile(input_path)
     msp = doc.modelspace()

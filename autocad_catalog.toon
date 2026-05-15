@@ -1,0 +1,2233 @@
+// MapPit 2025 — AutoCAD Command and Function Catalog
+// Format: TOON (key-value scalar / indented block / arr[N,]{...} uniform arrays)
+// Source: C:\MapPit2025\
+// Generated: 2026-05-14
+// Rule: every (defun C:...) found in any .lsp file; every ARX-exposed callable.
+//       Pure internal helpers are omitted (documented in extension_reference.md).
+
+catalog {
+    name: "MapPit 2025"
+    version: "2025"
+    host: "AutoCAD / BricsCAD"
+    vendor: "Pitronim Ltd."
+    source_root: "C:\\MapPit2025"
+    entry_count: 166
+}
+
+items[166]: {
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MENU LOADING COMMANDS  (TRA_ARX.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "pitmenu"
+    type: command
+    source_file: "TRA_ARX.LSP"
+    description: "Load English Pitronim main menu (pit_sub.mnu). Sets menubar=1 for acver>=17.2. Activates pop20-pop23."
+    parameters: []
+    returns: "nil"
+    side_effects: "Loads pit_sub.mnu; sets menubar system variable"
+}
+
+{
+    name: "hebmenu"
+    type: command
+    source_file: "TRA_ARX.LSP"
+    description: "Load Hebrew Pitronim main menu (pit_heb.mnu). Activates pop20-pop23."
+    parameters: []
+    returns: "nil"
+    side_effects: "Loads pit_heb.mnu"
+}
+
+{
+    name: "tabamenu"
+    type: command
+    source_file: "TRA_ARX.LSP"
+    description: "Load TABA land-use menu (tr_taba.mnu). Activates pop24."
+    parameters: []
+    returns: "nil"
+    side_effects: "Loads tr_taba.mnu"
+}
+
+{
+    name: "mamimenu"
+    type: command
+    source_file: "TRA_ARX.LSP"
+    description: "Load MAMI Hebrew menu (mami_heb.mnu)."
+    parameters: []
+    returns: "nil"
+    side_effects: "Loads mami_heb.mnu"
+}
+
+{
+    name: "pit"
+    type: command
+    source_file: "TRA_ARX.LSP"
+    description: "Legacy load command. Loads tra_lsp if not loaded; arxloads pit14.arx or pit95.arx."
+    parameters: []
+    returns: "nil"
+    side_effects: "May arxload legacy binary"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AUTOCAD SHORTCUT ALIASES  (TRA_LSP\TRA_KITZ.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "zw"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Zoom Window shortcut."
+    parameters: []
+    delegates_to: "_.zoom w"
+}
+
+{
+    name: "zp"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Zoom Previous shortcut."
+    parameters: []
+    delegates_to: "_.zoom p"
+}
+
+{
+    name: "zd"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Zoom Dynamic shortcut."
+    parameters: []
+    delegates_to: "_.zoom d"
+}
+
+{
+    name: "zv"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Zoom Vmax shortcut."
+    parameters: []
+    delegates_to: "_.zoom vmax"
+}
+
+{
+    name: "ze"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Zoom Extents shortcut."
+    parameters: []
+    delegates_to: "_.zoom e"
+}
+
+{
+    name: "ch"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Change entity properties shortcut."
+    parameters: []
+    delegates_to: "_.change"
+}
+
+{
+    name: "li"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "List entity shortcut."
+    parameters: []
+    delegates_to: "_.list"
+}
+
+{
+    name: "ex"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Extend shortcut."
+    parameters: []
+    delegates_to: "_.extend"
+}
+
+{
+    name: "x"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Explode shortcut."
+    parameters: []
+    delegates_to: "_.explode"
+}
+
+{
+    name: "of"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Offset shortcut."
+    parameters: []
+    delegates_to: "_.offset"
+}
+
+{
+    name: "tr"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Trim shortcut."
+    parameters: []
+    delegates_to: "_.trim"
+}
+
+{
+    name: "f"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Fillet (current radius) shortcut."
+    parameters: []
+    delegates_to: "_.fillet"
+}
+
+{
+    name: "fr"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Fillet — set radius shortcut."
+    parameters: []
+    delegates_to: "_.fillet r"
+}
+
+{
+    name: "laa"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Layer command shortcut."
+    parameters: []
+    delegates_to: "_.layer"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PITRONIM SHORTCUT ALIASES  (TRA_LSP\TRA_KITZ.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "con"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Auto-connect survey points into lines."
+    delegates_to: "trlincon"
+}
+
+{
+    name: "`"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Quick move (pick entity, pick new location)."
+    delegates_to: "trqmove"
+}
+
+{
+    name: "1"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Quick many — repeat move/insert."
+    delegates_to: "trqmany"
+}
+
+{
+    name: "2"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Quick edit text or attribute."
+    delegates_to: "trqed"
+}
+
+{
+    name: "3"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Draw survey boundary marker (hetz, TRA_SYS)."
+    delegates_to: "trqhetz"
+}
+
+{
+    name: "33"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Draw survey boundary marker (HANIT variant)."
+    delegates_to: "trqhetzHANIT"
+}
+
+{
+    name: "4"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Annotate single entity."
+    delegates_to: "tranots"
+}
+
+{
+    name: "5"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Sum front lengths with closure error calculation."
+    delegates_to: "trqsum"
+}
+
+{
+    name: "6"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Show/hide point value heights."
+    delegates_to: "trpvalh"
+}
+
+{
+    name: "d1"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Show distance label on one picked line."
+    delegates_to: "dist1"
+}
+
+{
+    name: "d2"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Show distance between two picked points."
+    delegates_to: "trqdist"
+}
+
+{
+    name: "er1"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 1 — delegates to specific error layer command."
+    delegates_to: "unknown"
+}
+
+{
+    name: "er2"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 2."
+    delegates_to: "unknown"
+}
+
+{
+    name: "er3"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 3."
+    delegates_to: "unknown"
+}
+
+{
+    name: "er4"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 4."
+    delegates_to: "unknown"
+}
+
+{
+    name: "er5"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 5."
+    delegates_to: "unknown"
+}
+
+{
+    name: "er6"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 6."
+    delegates_to: "unknown"
+}
+
+{
+    name: "er7"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 7."
+    delegates_to: "unknown"
+}
+
+{
+    name: "er8"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Error shortcut 8."
+    delegates_to: "unknown"
+}
+
+{
+    name: "lpl"
+    type: command
+    source_file: "TRA_LSP\\TRA_KITZ.LSP"
+    description: "Run labels placement optimizer (ARX labelsplacer_a)."
+    parameters: []
+    arx_call: "labelsplacer_a"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LAYER MANAGEMENT  (TRA_LSP\TRA_SHRT.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trsle"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Set current layer by picking an entity."
+    parameters: [{name:"entity", type:"pick", description:"Entity whose layer to set current"}]
+    returns: "nil"
+}
+
+{
+    name: "trstol"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Change entity layer — pick entities then specify target layer."
+    parameters: [{name:"entities", type:"pick-set"}, {name:"target_layer", type:"string"}]
+}
+
+{
+    name: "trn2l"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Set points matching name wildcard to a specified layer."
+    parameters: [{name:"name_wildcard", type:"string"}, {name:"layer", type:"string"}]
+}
+
+{
+    name: "trdle"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Delete all entities on a named layer."
+    parameters: [{name:"layer_name", type:"string"}]
+    side_effects: "Erases entities; layer remains"
+}
+
+{
+    name: "trfle"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Freeze a named layer."
+    parameters: [{name:"layer_name", type:"string"}]
+}
+
+{
+    name: "trl2l"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Move all entities from one layer to another."
+    parameters: [{name:"source_layer", type:"string"}, {name:"target_layer", type:"string"}]
+}
+
+{
+    name: "trshl1"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Show only one layer — freeze all others."
+    parameters: [{name:"layer_name", type:"string"}]
+}
+
+{
+    name: "trshls"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Show (thaw) multiple named layers."
+    parameters: [{name:"layer_list", type:"string-list"}]
+}
+
+{
+    name: "trrestl"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Restore layer visibility state from previously saved state."
+    parameters: []
+}
+
+{
+    name: "trqmove"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Quick move: pick entity, pick new insertion point. Calls mmove ARX."
+    parameters: [{name:"entity", type:"pick"}, {name:"new_point", type:"point"}]
+    arx_call: "mmove"
+}
+
+{
+    name: "trqrot"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Quick rotate: pick entity, pick rotation center, enter angle."
+    parameters: [{name:"entity", type:"pick"}, {name:"center", type:"point"}, {name:"angle", type:"real"}]
+}
+
+{
+    name: "trqmany"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Repeat quick move until Enter. Calls mmove ARX."
+    parameters: []
+    arx_call: "mmove"
+}
+
+{
+    name: "trqhetz"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Draw survey boundary marker block (hetz, TRA_SYS code system)."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "trqhetzHANIT"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Draw survey boundary marker block (HANIT code system)."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "trqsum"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Sum selected front lengths and calculate closure error."
+    parameters: [{name:"fronts", type:"pick-set"}]
+    returns: "Total length with error"
+}
+
+{
+    name: "trqsumhanit"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Sum front lengths — HANIT code system variant."
+    parameters: [{name:"fronts", type:"pick-set"}]
+}
+
+{
+    name: "trqed"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Interactive text/attribute editor with duplicate-name check."
+    parameters: [{name:"entity", type:"pick", description:"Text or attributed block"}]
+    side_effects: "Modifies attribute/text value; warns on duplicate names"
+}
+
+{
+    name: "trqdim"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Draw dimensioned text annotation along a line."
+    parameters: [{name:"line", type:"pick"}]
+}
+
+{
+    name: "trqdist"
+    type: command
+    source_file: "TRA_LSP\\TRA_SHRT.LSP"
+    description: "Show distance between two picked points; inserts TR_FRONT block at midpoint."
+    parameters: [{name:"p1", type:"point"}, {name:"p2", type:"point"}]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LOT NAMING  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "TRAnameLOTS"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Interactive lot naming: pick inside polygon, assign sequential or special lot number. Supports Jump, ChangeLayer, Special keywords."
+    parameters: [{name:"layer", type:"string", description:"Layer for lot name blocks"}, {name:"first_num", type:"integer", description:"Starting lot number"}]
+}
+
+{
+    name: "TRAnameLOTS_CDCD"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Lot naming — HANIT/CDCD code system variant."
+    parameters: [{name:"layer", type:"string"}, {name:"first_num", type:"integer"}]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POINT FILE IMPORT  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trxcnv"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Import/convert XYZ survey points from file via ARX."
+    parameters: [{name:"file", type:"file-dialog", description:"XYZ survey file"}]
+}
+
+{
+    name: "trlotcnv"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Import lot points from file."
+    parameters: [{name:"file", type:"file-dialog"}]
+}
+
+{
+    name: "trdigicnv"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Import digitizer format points."
+    parameters: [{name:"file", type:"file-dialog"}]
+}
+
+{
+    name: "trpcnv"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Import P-format survey points."
+    parameters: [{name:"file", type:"file-dialog"}]
+}
+
+{
+    name: "trgcnv"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Import G-format survey points."
+    parameters: [{name:"file", type:"file-dialog"}]
+}
+
+{
+    name: "trpreadcsv"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Import survey points from CSV file."
+    parameters: [{name:"file", type:"file-dialog", description:"CSV file with point data"}]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONNECTION COMMANDS  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trxcon"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Auto-connect XYZ format points into lines using ARX line-connection algorithm."
+    parameters: []
+    arx_call: "trlincon_a"
+}
+
+{
+    name: "trlotcon"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Connect lot format points."
+    parameters: []
+}
+
+{
+    name: "trpcon"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Connect P-format points."
+    parameters: []
+}
+
+{
+    name: "trpconcsv"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Connect CSV format points."
+    parameters: []
+}
+
+{
+    name: "trgcon"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Connect G-format points."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INSERT COMMANDS  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trgpnt"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert survey point symbols from G-format file."
+    parameters: []
+    arx_call: "trpins_a"
+}
+
+{
+    name: "trgfro"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert front measurement annotations."
+    parameters: []
+}
+
+{
+    name: "trglot"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert lot data from file."
+    parameters: []
+}
+
+{
+    name: "trgare"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert area data annotations."
+    parameters: []
+}
+
+{
+    name: "trgarc"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert arc data."
+    parameters: []
+}
+
+{
+    name: "trgall"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert all data: points, fronts, lots, areas in one pass."
+    parameters: []
+}
+
+{
+    name: "trghigh"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert height annotation labels."
+    parameters: []
+}
+
+{
+    name: "trgobj"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert lines and arcs from survey data."
+    parameters: []
+}
+
+{
+    name: "trgbrd"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert border/boundary entities."
+    parameters: []
+}
+
+{
+    name: "trdrawpoly"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Draw polylines from point data."
+    parameters: []
+}
+
+{
+    name: "trdrawpoly_CDCD"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Draw polylines from point data — HANIT/CDCD variant."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ERROR HANDLING  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trgerr"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Read and display DXF error file."
+    parameters: []
+}
+
+{
+    name: "trsherr"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Show error entities in drawing."
+    parameters: []
+}
+
+{
+    name: "trerr1"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Show error layers only — hide all other layers."
+    parameters: []
+}
+
+{
+    name: "trrsterrl"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Restore layer state after error display."
+    parameters: []
+}
+
+{
+    name: "trsherrl"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Show error layer."
+    parameters: []
+}
+
+{
+    name: "trhiderrl"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Hide error layer."
+    parameters: []
+}
+
+{
+    name: "trnoterr"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Mark selected entity as not an error."
+    parameters: [{name:"entity", type:"pick"}]
+}
+
+{
+    name: "trclrerr"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Clear all error markers from drawing."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SNAP SHOTS  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "spa"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Add current view/layer state as named snap shot."
+    parameters: [{name:"name", type:"string"}]
+}
+
+{
+    name: "spd"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Delete a named snap shot."
+    parameters: [{name:"name", type:"string"}]
+}
+
+{
+    name: "sps"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Show (restore) a snap shot — restores layers and view."
+    parameters: [{name:"name", type:"string"}]
+}
+
+{
+    name: "trsnp"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Open snap shots DCL dialog (SNP_SHOT.DCL / tra_cods_lst)."
+    parameters: []
+    dcl_dialog: "SNP_SHOT.DCL::tra_cods_lst"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ENTITY INSPECTION  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trecods"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Entity codes DCL dialog — inspect and edit entity MapPit codes."
+    parameters: [{name:"entity", type:"pick"}]
+    dcl_dialog: "DCL_CODS.DCL::tra_ecods_dlg"
+}
+
+{
+    name: "trlcods"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Layer codes DCL dialog — inspect layer MapPit codes."
+    parameters: []
+    dcl_dialog: "DCL_CODS.DCL::tra_lcods_dlg"
+}
+
+{
+    name: "pitconf"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Configuration DCL dialog — edit TR_CFG.INI session parameters."
+    parameters: []
+    dcl_dialog: "TRA_CONF.DCL::tra_conf_dlg"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LAYER VISUALIZATION  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "SHOWlayers"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Show (thaw/on) standard MapPit layers."
+    parameters: []
+}
+
+{
+    name: "SHOWlayersCADCAD"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Show HANIT (CADCAD) code system layers."
+    parameters: []
+}
+
+{
+    name: "TRprepTZR"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Prepare TZR (parcel) layers for drawing."
+    parameters: []
+}
+
+{
+    name: "TRprepGUSH"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Prepare GUSH (cadastral block) layers."
+    parameters: []
+}
+
+{
+    name: "TRprepGUSH2"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Prepare GUSH2 layers."
+    parameters: []
+}
+
+{
+    name: "TRprepGUSH_Hanit"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Prepare GUSH layers for HANIT code system."
+    parameters: []
+}
+
+{
+    name: "TRprepTZR_CDCD"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Prepare TZR layers — CDCD variant."
+    parameters: []
+}
+
+{
+    name: "TRprepGUSH_CDCD"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Prepare GUSH layers — CDCD variant."
+    parameters: []
+}
+
+{
+    name: "MARKgush"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Mark gush (cadastral block) boundary on specific layer."
+    parameters: []
+}
+
+{
+    name: "SELECTgush"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Select all entities within a named gush."
+    parameters: [{name:"gush_name", type:"string"}]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// COORDINATE / TRANSFORMATION  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trtrns"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Coordinate transformation dialog — up to 7 control point pairs. Shows TRA_TRNS.DCL::tr_trans."
+    parameters: []
+    dcl_dialog: "TRA_TRNS.DCL::tr_trans"
+}
+
+{
+    name: "trtrns25"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Coordinate transformation — up to 25 control point pairs."
+    parameters: []
+}
+
+{
+    name: "trlgnd"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert symbol legend block at picked point."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "tranots"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Annotate single entity — insert annotation block near picked entity."
+    parameters: [{name:"entity", type:"pick"}]
+    arx_call: "trpins_a"
+}
+
+{
+    name: "trsect"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Define and manage map sectors. Shows Tra_sect.dcl::tr_sect."
+    parameters: []
+    dcl_dialog: "Tra_sect.dcl::tr_sect"
+}
+
+{
+    name: "trcoords"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Insert coordinate annotation at picked point. Settings via tr_cords.dcl::tr_cords."
+    parameters: [{name:"point", type:"point"}]
+    dcl_dialog: "tr_cords.dcl::tr_cords"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HANIT-SPECIFIC  (TRA_LSP\TRA_UTL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "tr_CorBldCalc"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Area correlation build calculation. Calls c:tr_cor_build."
+    parameters: []
+    delegates_to: "tr_cor_build"
+}
+
+{
+    name: "tr_CreateHanitFronts"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Create HANIT front measurement entities from point data."
+    parameters: []
+}
+
+{
+    name: "tr_CreateHanitHekFronts"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Create HANIT HEK front measurement entities."
+    parameters: []
+}
+
+{
+    name: "tr_CreateHanitHekPolygons"
+    type: command
+    source_file: "TRA_LSP\\TRA_UTL.LSP"
+    description: "Create HANIT HEK polygon entities."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TABLE INSERTION  (TRA_LSP\TRA_TBL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "KRinsGUSH"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert GUSH area table (right-to-left, auto-select all entities)."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsGUSH"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert GUSH area table (left-to-right, auto-select)."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "KRinsGUSH2"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert GUSH2 table (user selection, right-to-left)."
+    parameters: [{name:"selection", type:"pick-set"}, {name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsGUSH2"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert GUSH2 table (user selection, left-to-right)."
+    parameters: [{name:"selection", type:"pick-set"}, {name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsTZR"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert TZR (parcel) summary table."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsTZR_CDCD"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert TZR table — CDCD/HANIT variant."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsTZR_HANIT_old"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert TZR table — old HANIT format."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "trinstzr_hanit"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert TZR table — new HANIT format via TRTAZARTABLE_A ARX."
+    parameters: [{name:"insertion_point", type:"point"}]
+    arx_call: "TRTAZARTABLE_A"
+}
+
+{
+    name: "TRinsTRNS"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert parcel transfer table."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsTRNS_CDCD"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert transfer table — CDCD variant."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsTRNS_HANIT"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert transfer table — HANIT variant."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsHEK_HANIT"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert HEK table (HANIT code system)."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsTTG_HANIT"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert TTG (Taba-Tatag) table (HANIT)."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsHanitAreasTable"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert lot areas table (HANIT format)."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "TRinsCOORD"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Insert coordinate table."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "trtranslots"
+    type: command
+    source_file: "TRA_LSP\\TRA_TBL.LSP"
+    description: "Transfer lots between records/gush blocks."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SURVEY DIALOG COMMANDS  (TRA_LSP\TRA_DDT.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "tr_points"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Add/modify POINTS dialog. Controls check-points, place-points, snap, scale, layer. Calls pitron ARX with selection set."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_points"
+    arx_call: "pitron"
+}
+
+{
+    name: "tr_linarc"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Modify LINES AND ARCS dialog. Break long lines, replace existing, entity selection."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_linarc"
+    arx_call: "pitron"
+}
+
+{
+    name: "tr_parc"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "PARCELS DEFINITION dialog. Lot code, correlation steps, entity selection."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_parc_def"
+    arx_call: "pitron"
+}
+
+{
+    name: "tr_topo"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Auto Topology dialog — build topological relationships between parcels."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_topo_dlg"
+}
+
+{
+    name: "tr_cor_build"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Areas Correlation build dialog."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_areas_cor"
+}
+
+{
+    name: "tr_set_gush"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Set Block to Lots dialog — assign gush block to lot records."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_set_gush"
+}
+
+{
+    name: "TRoutFILES"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Output ASCII FILES dialog. Toggles for SRV, PNT, YXZ, HEB, LOT, DEF, ARE output formats."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_outfiles"
+}
+
+{
+    name: "tr_parts"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Parts correlation dialog."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_parts_cor"
+}
+
+{
+    name: "tr_plan"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Plan correlation dialog."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_plan_cor"
+}
+
+{
+    name: "tr_plans"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Multiple plans correlation dialog."
+    parameters: []
+    dcl_dialog: "tra_ddt.dcl::tr_plans_cor"
+}
+
+// 3D Cadastre TAMAR Commands (TRA_LSP\TRA_DDT.LSP) — all via trtmrcommand_a
+
+{
+    name: "BuildSolid"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Build 3D solid from parcel boundaries."
+    arx_call: "trtmrcommand_a(\"BuildSolid\")"
+}
+
+{
+    name: "Extrude2Solid"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Extrude parcel polygon to 3D solid."
+    arx_call: "trtmrcommand_a(\"Extrude2Solid\")"
+}
+
+{
+    name: "UnifySolid"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Unify adjacent 3D solids."
+    arx_call: "trtmrcommand_a(\"UnifySolid\")"
+}
+
+{
+    name: "SubtractSolid"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Subtract one solid from another."
+    arx_call: "trtmrcommand_a(\"SubtractSolid\")"
+}
+
+{
+    name: "Add3dParcel"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Add new 3D parcel definition."
+    arx_call: "trtmrcommand_a(\"Add3dParcel\")"
+}
+
+{
+    name: "ParcelsDeduction"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Calculate parcel area deduction."
+    arx_call: "trtmrcommand_a(\"ParcelsDeduction\")"
+}
+
+{
+    name: "Ins_parcel_table"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Insert parcel table."
+    arx_call: "trtmrcommand_a(\"Ins_parcel_table\")"
+}
+
+{
+    name: "Ins_Subtract_table"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Insert subtraction table."
+    arx_call: "trtmrcommand_a(\"Ins_Subtract_table\")"
+}
+
+{
+    name: "splitparcels"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Split parcel interactively."
+    arx_call: "trtmrcommand_a(\"splitparcels\")"
+}
+
+{
+    name: "Ins_Divide_parcel_table"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Insert parcel division table."
+    arx_call: "trtmrcommand_a(\"Ins_Divide_parcel_table\")"
+}
+
+{
+    name: "Unify_parcels"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Unify parcels."
+    arx_call: "trtmrcommand_a(\"Unify_parcels\")"
+}
+
+{
+    name: "UnifyLoop_parcels"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Loop-unify parcels."
+    arx_call: "trtmrcommand_a(\"UnifyLoop_parcels\")"
+}
+
+{
+    name: "Ins_Unify_parcel_Table"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Insert parcel unification table."
+    arx_call: "trtmrcommand_a(\"Ins_Unify_parcel_Table\")"
+}
+
+{
+    name: "Parcels_Gush_Transfer"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Transfer parcels between gush blocks."
+    arx_call: "trtmrcommand_a(\"Parcels_Gush_Transfer\")"
+}
+
+{
+    name: "Ins_Gush_Transfer_table"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Insert gush transfer table."
+    arx_call: "trtmrcommand_a(\"Ins_Gush_Transfer_table\")"
+}
+
+{
+    name: "Difine_Section"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Define cross-section plane."
+    arx_call: "trtmrcommand_a(\"Difine_Section\")"
+}
+
+{
+    name: "Cross_Section"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Generate cross-section view."
+    arx_call: "trtmrcommand_a(\"Cross_Section\")"
+}
+
+{
+    name: "splitparcels_prompt"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Split parcel with additional prompt."
+    arx_call: "trtmrcommand_a(\"splitparcels_prompt\")"
+}
+
+{
+    name: "POINTS_SURFACE"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Create surface from points."
+    arx_call: "trtmrcommand_a(\"POINTS_SURFACE\")"
+}
+
+{
+    name: "POLYS_SURFACE"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "3D Cadastre: Create surface from polygons."
+    arx_call: "trtmrcommand_a(\"POLYS_SURFACE\")"
+}
+
+{
+    name: "raznizav"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Raznizav (difference elevation) calculation."
+    arx_call: "TRraznizav_A"
+}
+
+{
+    name: "RESTOREraznizav"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Restore previous raznizav state."
+    arx_call: "TRRNZRESTORE_A"
+}
+
+{
+    name: "trLotTreeView"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Show lot tree view (.NET WPF UI)."
+    arx_call: "TR_SHOWLOTTREE_A"
+}
+
+{
+    name: "trtazarmenu"
+    type: command
+    source_file: "TRA_LSP\\TRA_DDT.LSP"
+    description: "Show TAZAR parcel management UI (.NET)."
+    arx_call: "TR_SHOWTAZARUI_A"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAPER SPACE  (TRA_LSP\TRA_PS.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "gildiv"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Main gilyon (map sheet) division. Prompts Grouped/<Separated>: dispatches to grouping or single mode. Calls trautogil and tr_pspace ARX functions."
+    parameters: [{name:"mode", type:"keyword", options:["Grouped","Separated"]}]
+    arx_call: "trautogil, tr_pspace"
+}
+
+{
+    name: "gilkey"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Create sheets location plan (key map) with hatch in paper space. Requires TILEMODE=0."
+    parameters: []
+    prerequisite: "TILEMODE=0"
+}
+
+{
+    name: "clean_gil"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Delete UCS, block, and layer for a gilyon number."
+    parameters: [{name:"gilyon_number", type:"integer"}]
+    side_effects: "Deletes UCS, block definition, layer from drawing"
+}
+
+{
+    name: "cut_gil_ps"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Cut gilyon from paper space to external DWG file."
+    parameters: [{name:"gilyon_number", type:"integer"}, {name:"output_file", type:"file-dialog"}]
+}
+
+{
+    name: "cut_gil_ms"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Cut gilyon from model space using polyline boundary and trim."
+    parameters: [{name:"boundary_polyline", type:"pick"}]
+}
+
+{
+    name: "tr_chvp_s"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Start viewport change mode."
+    parameters: []
+}
+
+{
+    name: "tr_chvp_f"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Finish viewport change mode."
+    parameters: []
+}
+
+{
+    name: "tr_show_vp"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Show (thaw) viewport layer."
+    parameters: []
+}
+
+{
+    name: "tr_hide_vp"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Hide (freeze) viewport layer."
+    parameters: []
+}
+
+{
+    name: "gilon"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Thaw all TR_GIL* layers."
+    parameters: []
+}
+
+{
+    name: "giloff"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Freeze all TR_GIL* layers."
+    parameters: []
+}
+
+{
+    name: "tops"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Switch to paper space (set TILEMODE=0)."
+    parameters: []
+    side_effects: "Sets TILEMODE=0"
+}
+
+{
+    name: "toms"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Switch to model space (set TILEMODE=1)."
+    parameters: []
+    side_effects: "Sets TILEMODE=1"
+}
+
+{
+    name: "tr_pschg"
+    type: command
+    source_file: "TRA_LSP\\tr_pschg.lsp"
+    description: "Change/create paper-space sheet layout for a gilyon. Prompts for gilyon number; creates UCS, polyline frame, centered text label; calls tr_pspace ARX."
+    parameters: [{name:"gilyon_number", type:"integer"}]
+    arx_call: "trautogil, tr_getrect, tr_pspace"
+}
+
+{
+    name: "zzz"
+    type: command
+    source_file: "TRA_LSP\\TRA_PS.LSP"
+    description: "Debug/test hatch command."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GILYON FRAME  (TRA_LSP\TRA_RISH.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "TRinsgil"
+    type: command
+    source_file: "TRA_LSP\\TRA_RISH.LSP"
+    description: "Insert gilyon (map sheet) frame block. Calls ARX trgetgil to determine block type. Sets ATTREQ=1, ATTDIA=0 before insert."
+    parameters: []
+    arx_call: "trgetgil"
+    side_effects: "Sets ATTREQ=1, ATTDIA=0; restores after insert"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DTM / CONTOUR INTERFACE  (TRA_LSP\TRA_IDAN.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "tridnprj"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Change DTM (Digital Terrain Model) project."
+    parameters: []
+    arx_call: "tridnprj_a"
+}
+
+{
+    name: "trruncnt"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Create and run DTM contour calculation. Settings via TRA_IDAN.DCL::TRidan_get_cont."
+    parameters: []
+    dcl_dialog: "TRA_IDAN.DCL::TRidan_get_cont"
+    arx_call: "trruncnt_a"
+}
+
+{
+    name: "trgetcnt"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Draw contour lines from DTM calculation results."
+    parameters: []
+    arx_call: "trgetcnt_a"
+}
+
+{
+    name: "trwreg"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Write REG (registration) file for DTM."
+    parameters: []
+    arx_call: "trwreg_a"
+}
+
+{
+    name: "trwdis"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Write DIS (distance/triangulation) file."
+    parameters: []
+    arx_call: "trwdis_a"
+}
+
+{
+    name: "trreadis"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Read DIS file into DTM."
+    parameters: []
+    arx_call: "trreadis_a"
+}
+
+{
+    name: "trwbou"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Write BOU (boundary) file for DTM area."
+    parameters: []
+    arx_call: "trwbou_a"
+}
+
+{
+    name: "triremod"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Change DTM elevation mode."
+    parameters: []
+    arx_call: "triremod_a"
+}
+
+{
+    name: "trice"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Run ICE (interpolation/contour engine) 2D."
+    parameters: []
+    arx_call: "trice_a"
+}
+
+{
+    name: "trice3d"
+    type: command
+    source_file: "TRA_LSP\\TRA_IDAN.LSP"
+    description: "Run ICE 3D (3-dimensional contour engine)."
+    parameters: []
+    arx_call: "trice3d_a"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TABA LAND USE  (TRA_LSP\TR_TABA.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "trhp"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Set polygon layers and annotate land-use codes."
+    parameters: []
+}
+
+{
+    name: "trhh"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Draw hatches for land-use polygons."
+    parameters: []
+}
+
+{
+    name: "trhl"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Insert area land-usage legend."
+    parameters: [{name:"insertion_point", type:"point"}]
+}
+
+{
+    name: "trhupdt"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Update lot area usage values."
+    parameters: []
+}
+
+{
+    name: "trdbsel"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Select lot database (.mdb file)."
+    parameters: []
+}
+
+{
+    name: "trlotdat"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Edit lot data interactively."
+    parameters: []
+}
+
+{
+    name: "tri2db"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Copy annotation values to lot database."
+    parameters: []
+}
+
+{
+    name: "trl2db_flag"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Toggle auto-copy lots to database flag."
+    parameters: []
+}
+
+{
+    name: "trh_on"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Show (thaw/on) hatch layer."
+    parameters: []
+}
+
+{
+    name: "trh_off"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Hide (freeze/off) hatch layer."
+    parameters: []
+}
+
+{
+    name: "trh_del"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Delete hatch entities from hatch layer."
+    parameters: []
+}
+
+{
+    name: "trhsld"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Create slide libraries for TABA symbol picker."
+    parameters: []
+}
+
+{
+    name: "trhdon"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Show land usage description labels."
+    parameters: []
+}
+
+{
+    name: "trhdoff"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Hide land usage description labels."
+    parameters: []
+}
+
+{
+    name: "trgushon"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Show gush (cadastral block) description labels."
+    parameters: []
+}
+
+{
+    name: "trgushoff"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Hide gush description labels."
+    parameters: []
+}
+
+{
+    name: "trhcola"
+    type: command
+    source_file: "TRA_LSP\\TR_TABA.LSP"
+    description: "Color areas by land-usage code."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POLYLINE CLIP  (TRA_LSP\TRA_EPOL.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "epol"
+    type: command
+    source_file: "TRA_LSP\\TRA_EPOL.LSP"
+    description: "Erase entities inside or outside a closed polyline boundary. Optionally cuts lines that cross the boundary."
+    parameters: [
+        {name:"boundary_polyline", type:"pick"},
+        {name:"erase_mode", type:"keyword", options:["Inside","Outside"]},
+        {name:"cut_crossing", type:"keyword", options:["Yes","No"]},
+        {name:"selection_method", type:"keyword", options:["Window","Crossing"]}
+    ]
+    side_effects: "Erases/offsets/trims entities; restores zoom"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// IMAGE HELMERT TRANSFORMATION  (TRA_LSP\Image_helmert.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "tr_Image_Helmrt_trans"
+    type: command
+    source_file: "TRA_LSP\\Image_helmert.lsp"
+    description: "Graphical Helmert (4-parameter conformal) coordinate transformation. Collect >= 2 source/target control point pairs interactively; compute least-squares translation (dx,dy), rotation (w), scale (q); apply to selected entities."
+    parameters: [
+        {name:"control_point_pairs", type:"interactive", description:">= 2 pairs of source and target points"},
+        {name:"entities", type:"pick-set", description:"Entities to transform"}
+    ]
+    side_effects: "Modifies entity coordinates via entmod"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SYMBOL MANAGEMENT  (TRA_LSP\tr_symbol.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "tr_update_symbols"
+    type: command
+    source_file: "TRA_LSP\\tr_symbol.lsp"
+    description: "Update point symbol codes. Interactive: display 13-symbol list, user picks number, selects points, updates block/layer/TRSYMBOL xdata."
+    parameters: [
+        {name:"symbol_number", type:"integer", description:"1-13 selection from list"},
+        {name:"points", type:"pick-set"}
+    ]
+    side_effects: "Updates entity block layer and TRSYMBOL xdata via entmod"
+}
+
+{
+    name: "tr_query_symbol"
+    type: command
+    source_file: "TRA_LSP\\tr_symbol.lsp"
+    description: "Query symbol information stored in entity xdata (app TRSYMBOL)."
+    parameters: [{name:"entity", type:"pick"}]
+    returns: "Prints symbol name and description to console"
+}
+
+{
+    name: "tr_list_symbols"
+    type: command
+    source_file: "TRA_LSP\\tr_symbol.lsp"
+    description: "Display all 13 available point symbols with codes and descriptions."
+    parameters: []
+    returns: "Console output only"
+}
+
+{
+    name: "tr_batch_update_by_layer"
+    type: command
+    source_file: "TRA_LSP\\tr_symbol.lsp"
+    description: "Batch update all POINT entities on a named layer to a specified symbol."
+    parameters: [
+        {name:"layer_name", type:"string"},
+        {name:"symbol_name", type:"string", description:"Must be valid symbol name from library"}
+    ]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SYMBOL CODE UPDATE  (TRA_LSP\tr_updcode.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "TRUPDCODE"
+    type: command
+    source_file: "TRA_LSP\\tr_updcode.lsp"
+    description: "Update MapPit point symbol code and mark without interactive dialog. Three-tier entity finding: (1) scan all INSERTs for TAG=NAME match, (2) trmfindp ARX pan-to-point, (3) manual entsel. Reads Hanit_Pcod.INI for new block/layer; loads block if needed; updates INSERT+MARK via entmod."
+    parameters: [
+        {name:"point_name", type:"string", description:"Point name to find"},
+        {name:"new_code", type:"string", description:"New symbol code (must exist in Hanit_Pcod.INI)"},
+        {name:"new_mark", type:"string", description:"New mark value (Enter to keep current)"}
+    ]
+    side_effects: "Modifies INSERT block name, layer, MARK attribute via entmod"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ELEVATION LABEL THINNING  (TRA_LSP\tr_thin.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "THINHEIGHTS"
+    type: command
+    source_file: "TRA_LSP\\tr_thin.lsp"
+    description: "Thin elevation height labels. Selects area (rectangle or polyline), reads HEIGHTM_ATT tags from Hanit_Pcod.INI, finds M1502_P INSERT height ATTRIBs, applies greedy radius-based thinning sorted by elevation descending, hides redundant ATTRIBs by setting DXF code-70 invisible bit, saves original flags in TRTHIN xdata."
+    parameters: [
+        {name:"area_mode", type:"keyword", options:["Rectangle","Polyline"]},
+        {name:"boundary", type:"pick-or-corners", description:"Polyline ename or two rectangle corners"},
+        {name:"radius", type:"real", description:"Thinning radius in drawing units (default 10.0)"},
+        {name:"elevation_tolerance", type:"real", description:"Elevation closeness threshold (default 0.05)"}
+    ]
+    side_effects: "Sets ATTRIB invisible flag bit via entmod; writes TRTHIN xdata; calls entupd on parent INSERTs"
+}
+
+{
+    name: "RESTOREHEIGHTS"
+    type: command
+    source_file: "TRA_LSP\\tr_thin.lsp"
+    description: "Restore elevation labels hidden by THINHEIGHTS. Finds all ATTRIBs with TRTHIN xdata; restores original DXF code-70 flags; calls entupd on M1502_P parent INSERTs."
+    parameters: []
+    side_effects: "Restores ATTRIB invisible flag via entmod; removes TRTHIN xdata"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DEMO / UTILITY COMMANDS  (TRA_LSP\DEMO.LSP)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "fff"
+    type: command
+    source_file: "TRA_LSP\\DEMO.LSP"
+    description: "Interactive polyline join: pick starting line/arc/polyline, repeatedly join next selected objects into a continuous fitted polyline."
+    parameters: [{name:"start_entity", type:"pick"}, {name:"join_entities", type:"pick-loop"}]
+}
+
+{
+    name: "dist1"
+    type: command
+    source_file: "TRA_LSP\\DEMO.LSP"
+    description: "Show distance label for one picked line. Inserts TR_FRONT block at midpoint. Loops until no more lines picked."
+    parameters: [{name:"line", type:"pick-loop"}]
+    arx_call: "trpins_a(\"TR_FRONT\",...)"
+}
+
+{
+    name: "dist2"
+    type: command
+    source_file: "TRA_LSP\\DEMO.LSP"
+    description: "Show distance label between two picked points. Inserts TR_FRONT block at midpoint. Loops."
+    parameters: [{name:"p1", type:"point"}, {name:"p2", type:"point"}]
+}
+
+{
+    name: "ddd"
+    type: command
+    source_file: "TRA_LSP\\DEMO.LSP"
+    description: "Simple distance measurement — pick two points, print distance to console. No height factor."
+    parameters: [{name:"p1", type:"point"}, {name:"p2", type:"point"}]
+    returns: "Prints distance string to console"
+}
+
+{
+    name: "att2pt"
+    type: command
+    source_file: "TRA_LSP\\DEMO.LSP"
+    description: "Elevate attribute text positions to match INSERT block Z height for selected INSERT entities."
+    parameters: [{name:"inserts", type:"pick-set", description:"INSERT entities"}]
+    side_effects: "Modifies ATTRIB group-10/11 Z coordinates via entmod"
+}
+
+{
+    name: "ob_chg"
+    type: command
+    source_file: "TRA_LSP\\DEMO.LSP"
+    description: "Set oblique angle (DXF code 51) of selected text entities to 0. Fixes IntelliCAD oblique angle issue."
+    parameters: [{name:"texts", type:"pick-set"}]
+    side_effects: "Sets code-51=0 on all selected TEXT entities via entmod"
+}
+
+{
+    name: "xxx"
+    type: command
+    source_file: "TRA_LSP\\tr_pschg.lsp"
+    description: "Debug: pick entity, print its NOTR_DXF extended data group -3 to console."
+    parameters: [{name:"entity", type:"pick"}]
+    returns: "Prints xdata to console"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PITRONIM MENU LOADERS  (PitronimMnu.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "Pit3Dmenu"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load PitCadastre3D English menu (PitCadastre3D.mnu). Activates pop20."
+    parameters: []
+}
+
+{
+    name: "Pit3Dheb"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load PitCadastre3D Hebrew menu (PitCadastre3Dheb.mnu). Activates pop20."
+    parameters: []
+}
+
+{
+    name: "PitronMenu"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load Pitron English menu (Pitron.mnu). Activates pop21."
+    parameters: []
+}
+
+{
+    name: "PitronHeb"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load Pitron Hebrew menu (Pitronheb.mnu). Activates pop21."
+    parameters: []
+}
+
+{
+    name: "MapConmenu"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load MapContours English menu (MapContours.mnu). Activates pop23."
+    parameters: []
+}
+
+{
+    name: "MapConHeb"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load MapContours Hebrew menu (MapContoursheb.mnu). Activates pop23."
+    parameters: []
+}
+
+{
+    name: "MapPitMenu"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load MapPit English toolbar menu (MapPitMNU.mnu). Activates pop22."
+    parameters: []
+}
+
+{
+    name: "MapPitMNUHeb"
+    type: command
+    source_file: "PitronimMnu.lsp"
+    description: "Load MapPit Hebrew toolbar menu (MapPitMNUheb.mnu). Activates pop22."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AREAFLEX (tra_flex\Tra_flex.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "flex_help"
+    type: command
+    source_file: "tra_flex\\Tra_flex.lsp"
+    description: "Show AreaFlex help list box."
+    parameters: []
+    arx_call: "arfhelp"
+}
+
+{
+    name: "flex_about"
+    type: command
+    source_file: "tra_flex\\Tra_flex.lsp"
+    description: "Show AreaFlex about box."
+    parameters: []
+    arx_call: "arfabout"
+}
+
+{
+    name: "ARFconf"
+    type: command
+    source_file: "tra_flex\\Tra_flex.lsp"
+    description: "AreaFlex configuration dialog (arf_conf). Controls area/lot-names text display and mekadem coefficient."
+    parameters: []
+    dcl_dialog: "arf_dcl\\ARF_ddt.dcl::arf_conf"
+    arx_call: "trscnf_a"
+}
+
+{
+    name: "ARFnameLOTS"
+    type: command
+    source_file: "tra_flex\\Tra_flex.lsp"
+    description: "AreaFlex interactive lot naming. Pick inside polygon to assign sequential lot number. Supports Special/Jump/ChangeLayer keywords."
+    parameters: [
+        {name:"layer", type:"string", description:"Lot names layer"},
+        {name:"first_num", type:"integer", description:"Starting lot number"}
+    ]
+    arx_call: "trilot_a"
+}
+
+{
+    name: "flex"
+    type: command
+    source_file: "tra_flex\\Tra_flex.lsp"
+    description: "Main AreaFlex parcel-definition dialog (arf_parc_def). Thaws EXT_FLX* layers; loads arf_ddt.dcl; calls pitron(5) with selected entities."
+    parameters: []
+    dcl_dialog: "arf_dcl\\ARF_ddt.dcl::arf_parc_def"
+    arx_call: "pitron(5)"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FLEX MENU LOADERS  (tra_flex\flex_mnu.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "flexmenu"
+    type: command
+    source_file: "tra_flex\\flex_mnu.lsp"
+    description: "Load Flex English toolbar menu (flex.mnu). Activates pop24."
+    parameters: []
+}
+
+{
+    name: "flexheb"
+    type: command
+    source_file: "tra_flex\\flex_mnu.lsp"
+    description: "Load Flex Hebrew toolbar menu (flexheb.mnu). Activates pop24."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BRICSCAD MENU LOADERS  (BricsCAD\tra_brx.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "PitBrxMenu"
+    type: command
+    source_file: "BricsCAD\\tra_brx.lsp"
+    description: "Load BricsCAD English menu (pit_brx.mnu). Activates pop20-pop23."
+    parameters: []
+}
+
+{
+    name: "HebBrxMenu"
+    type: command
+    source_file: "BricsCAD\\tra_brx.lsp"
+    description: "Load BricsCAD Hebrew menu (heb_brx.mnu). Activates pop20-pop23."
+    parameters: []
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AUTODESK CHTEXT UTILITY  (USR\chtext.lsp)
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+    name: "cht"
+    type: command
+    source_file: "USR\\chtext.lsp"
+    description: "Autodesk CHText: global text property editor. Select text/mtext/attdef entities then choose Height/Justification/Location/Rotation/Style/Text/Undo/Width to change individually, globally, or by list/select. Copyright 1997 Autodesk Inc."
+    parameters: [
+        {name:"entities", type:"pick-set", description:"TEXT, MTEXT, ATTDEF entities"},
+        {name:"property", type:"keyword", options:["Height","Justification","Location","Rotation","Style","Text","Undo","Width"]}
+    ]
+}
+
+{
+    name: "CHGTEXT"
+    type: command
+    source_file: "USR\\chtext.lsp"
+    description: "Simple find-and-replace text editor (subset of CHT). Select text entities, supply match string and replacement string."
+    parameters: [
+        {name:"entities", type:"pick-set"},
+        {name:"match_string", type:"string"},
+        {name:"replacement_string", type:"string"}
+    ]
+}
+
+} // end items
