@@ -13,9 +13,18 @@ def dump_all_attribs(e, f, indent="  "):
         f.write(f"{indent}{key} = {value}\n")
 
 def run():
+    
     input_path = r"26357.dxf"
     output_path = r"26357_entities.txt"
+    inputs = {
+        "Points",
+        "Lines",
+        "Arcs",
+        "Texts",
+        "InsertedTexts",
+        "MTexts",
 
+    }
     doc = ezdxf.readfile(input_path)
     msp = doc.modelspace()
 
@@ -39,19 +48,14 @@ def run():
                 f.write(f"  layer:        {e.dxf.layer}\n")
                 f.write(f"  -- all attribs --\n")
                 dump_all_attribs(e, f, indent="    ")
-
-            elif etype == "MTEXT":
-                f.write(f"  text:         {e.plain_text()!r}\n")
-                f.write(f"  raw_text:     {e.text!r}\n")
-                f.write(f"  position:     {e.dxf.insert}\n")
-                f.write(f"  char_height:  {e.dxf.char_height}\n")
-                f.write(f"  width:        {e.dxf.get('width', 0)}\n")
-                f.write(f"  rotation:     {e.dxf.get('rotation', 0)}\n")
-                f.write(f"  attachment:   {e.dxf.get('attachment_point', 1)}\n")
-                f.write(f"  style:        {e.dxf.get('style', 'Standard')}\n")
-                f.write(f"  layer:        {e.dxf.layer}\n")
-                f.write(f"  -- all attribs --\n")
-                dump_all_attribs(e, f, indent="    ")
+                data = {
+                    'text': e.dxf.text!r,
+                    'position': [e.dxf.insert[0],e.dxf.insert[1]],
+                    'height': e.dxf.height,
+                    'rotation': e.dxf.get('rotation', 0),
+                    'layer': e.dxf.layer
+                }
+                inputs["Texts"].add(data)
 
             elif etype == "INSERT":
                 f.write(f"  block_name:   {e.dxf.name}\n")
@@ -63,7 +67,6 @@ def run():
                 f.write(f"  row_count:    {e.dxf.get('row_count', 1)}\n")
                 f.write(f"  column_count: {e.dxf.get('column_count', 1)}\n")
                 f.write(f"  layer:        {e.dxf.layer}\n")
-
                 # ATTRIB sub-entities (the visible labels attached to the block)
                 attribs = list(e.attribs)
                 if attribs:
@@ -76,6 +79,21 @@ def run():
                         f.write(f"      rotation: {a.dxf.get('rotation', 0)}\n")
                         f.write(f"      layer:    {a.dxf.layer}\n")
                         f.write(f"      -- all attrib attribs --\n")
+                        print(a.dxf.tag!r)
+                        if e.dxf.name is 'M1000_E' and a.dxf.tag == 'DESC':
+                            data = {
+                                'text': a.dxf.text!r,
+                                'position': [a.dxf.insert[0],a.dxf.insert[1]],
+                                'height': a.dxf.height,
+                                'rotation': a.dxf.get('rotation', 0),
+                                'layer': e.dxf.layer
+                            }
+                            for key, value in e.dxfattribs().items():
+                                if key in ["insert", "align_point"]:
+                                    data[key] = [value[0], value[1]]
+                                elif key in ["style"]:
+                                    data[key] = value
+                            inputs["InsertedTexts"].add(data)
                         dump_all_attribs(a, f, indent="        ")
                 f.write(f"  -- all insert attribs --\n")
                 dump_all_attribs(e, f, indent="    ")
